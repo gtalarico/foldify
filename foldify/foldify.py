@@ -1,8 +1,8 @@
 import sys
 from collections import OrderedDict
 
-from helper import mkjson_from_folder, mkdirs_from_json_dict
-from helper import load_file, dump_json
+from core import mkjson_from_folder, mkdirs_from_json_dict
+from core import load_file, dump_json
 
 
 def menu_copy_folder_tree():
