@@ -140,7 +140,8 @@ if __name__ == '__main__':
         tree = tree_from_folder('root')
         # print tree.get_json_string()
         for i in tree.iter_down():
-            print i.fullpath
+            print i.static_fullpath
+            print i.ancestors_fullpath
             print i.path_type
         # print tree.children[0].children[1].root
         # for i in tree.children[0].children[1].iter_up():

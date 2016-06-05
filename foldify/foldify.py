@@ -55,14 +55,16 @@ menu = (
         )
 menu = OrderedDict(menu)
 
-while True:
-    print '='*30
-    print 'Foldify'
-    print '='*30
-    for n, func in menu.items():
-        print '{0} - {1}'.format(n, func.__doc__)
-    selection = raw_input('Select an option:')
-    try:
-        menu[selection]()
-    except KeyError:
-        print 'Invalid Option'
+if __name__ == '__main__':
+
+    while True:
+        print '='*30
+        print 'Foldify'
+        print '='*30
+        for n, func in menu.items():
+            print '{0} - {1}'.format(n, func.__doc__)
+        selection = raw_input('Select an option:')
+        try:
+            menu[selection]()
+        except KeyError:
+            print 'Invalid Option'
