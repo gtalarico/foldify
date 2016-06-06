@@ -3,7 +3,8 @@ from foldify.path_tree import PathO, tree_from_folder, tree_from_json_dict
 
 TEST_FOLDER = 'root'
 
-class TestPathTree(unittest.TestCase):
+class TestPa
+class TestPathTreeClass(unittest.TestCase):
 
     def setUp(self):
         root = PathO('rootpath')
@@ -26,14 +27,8 @@ class TestPathTree(unittest.TestCase):
         import pdb; pdb.set_trace()
         assert child1.parent.name == 'rootpath'
 
-    def test_split(self):
-        self.assertTrue('FOO'.isupper())
-        self.assertFalse('Foo'.isupper())
-        s = 'hello world'
-        self.assertEqual(s.split(), ['hello', 'world'])
-        # check that s.split fails when the separator is not a string
-        with self.assertRaises(TypeError):
-            s.split(2)
+        # with self.assertRaises(TypeError):
+            # s.split(2)
 
 if __name__ == '__main__':
     unittest.main()

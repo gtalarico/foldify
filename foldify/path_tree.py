@@ -72,6 +72,15 @@ class PathO(object):
             for c in child.iter_down():
                 yield c
 
+    def add_child(self, child_patho):
+        print 'Adding:[{}] to self[{}]'.format(child_patho, self)
+        if not isinstance(child_patho, PathO):
+            raise TypeError('Child is not a PathO Node')
+        else:
+            self.children.append(child_patho)
+            child_patho.parent = self
+        print 'Childs chilren:', child_patho.children
+
 
     def get_json_dict(self, detailed=False):
         d = OrderedDict()
@@ -137,11 +146,10 @@ if __name__ == '__main__':
 
     # TESTS
     def test_tree_from_folder():
-        tree = tree_from_folder('root')
+        tree = tree_from_folder('tests/root')
         # print tree.get_json_string()
         for i in tree.iter_down():
             print i.static_fullpath
-            print i.ancestors_fullpath
             print i.path_type
         # print tree.children[0].children[1].root
         # for i in tree.children[0].children[1].iter_up():
