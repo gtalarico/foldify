@@ -10,7 +10,7 @@ from path_tree import tree_from_folder, tree_from_json_dict
 # Add Tests
 
 # Functionality:
-# 4. Validate Dir (print delta)
+# 4. Validate Dir (print(delta))
 # 5. Migratation file scrips (x becomes y, z > y) -advanced
 # interface:
 # stage a: command line, OS folder selector
@@ -26,7 +26,7 @@ def load_file(source_file):
             except ValueError as e:
                 print("Could Not Parse Json: {}".format(e))
     except IOError as errmsg:
-        print errmsg
+        print(errmsg)
 # tree = load_file('test.json')
 
 
@@ -34,20 +34,19 @@ def dump_json(filename, json_dict):
     ''' creates a .json file from a python object '''
     filename = '{0}.json'.format(filename)
     try:
-        with open(filename, 'wx') as outfile:
-            json.dump(json_dict, outfile, indent=2)
+        with open(filename, 'x') as outfile:
+            json.dump(json_dict, outfile, indent=4)
     except IOError as errmsg:
-        print errmsg
+        print(errmsg)
     else:
         return True
-
 
 # dump_json('test.json', tree.get_json_dict())
 
 
 def mkdirs_from_json_dict(new_foldername, json_dict):
     if os.path.exists(new_foldername):
-        print 'Cannot Copy. Folder already exists: ', new_foldername
+        print('Cannot Copy. Folder already exists: ', new_foldername)
         return
 
     new_tree = tree_from_json_dict(json_dict)
@@ -60,7 +59,7 @@ def mkdirs_from_json_dict(new_foldername, json_dict):
                 os.makedirs(patho.ancestors_fullpath)
             except OSError as errmsg:
                 import pdb; pdb.set_trace()
-                print errmsg
+                print(errmsg)
                 failed = True
                 break
         else:
@@ -68,18 +67,18 @@ def mkdirs_from_json_dict(new_foldername, json_dict):
                 with open(patho.ancestors_fullpath, 'w') as f:
                     pass
             except OSError as errmsg:
-                print errmsg
+                print(errmsg)
                 failed = True
                 break
 
     if not failed and os.path.exists(new_tree.root.ancestors_fullpath):
         return True
     else:
-        print 'Make Dirs Operation Failed Deleting tree: ', new_foldername
+        print('Make Dirs Operation Failed Deleting tree: ', new_foldername)
         try:
             shutil.rmtree(new_tree.root.fullpath)
         except:
-            print 'Attempted but failed to delete folder: ', new_foldername
+            print('Attempted but failed to delete folder: ', new_foldername)
 
 
 def mkjson_from_folder(source_folder):
@@ -88,7 +87,7 @@ def mkjson_from_folder(source_folder):
         tree = tree_from_folder(source_folder)
         return tree.get_json_dict()
     else:
-        print 'Failed to make json. Folder not found: [{}]'.format(source_folder)
+        print('Failed to make json. Folder not found: [{}]'.format(source_folder))
 
 def compare_folders(source_folder, dest_folder):
     match, mismatch = [], []
@@ -104,6 +103,7 @@ def compare_folders(source_folder, dest_folder):
     return match, mismatch
 
 if __name__ == '__main__':
-    json_dict = load_file('root.json')
+    TEST_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)),'tests','root.json')
+    json_dict = load_file(TEST_FILE)
     tree = tree_from_json_dict(json_dict)
     # mkdirs_from_json_dict('rootnew2', tree.get_json_dict())

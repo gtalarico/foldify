@@ -5,12 +5,14 @@ from collections import OrderedDict
 
 class PathO(object):
 
-    def __init__(self, name, static_fullpath=None, children=[], parent=None):
+    def __init__(self, name, static_fullpath=None, children=None, parent=None):
         self.name = name
-        self.children = children
+        if children is None:
+            self.children = []
         self.parent = parent
         self.static_fullpath = static_fullpath
         self.path_type = None
+        print('PATHO INIT:', self)
 
     @property
     def exists(self):
@@ -73,13 +75,20 @@ class PathO(object):
                 yield c
 
     def add_child(self, child_patho):
-        print 'Adding:[{}] to self[{}]'.format(child_patho, self)
+        ''' Adds a PathO as child of self, with integrity checks.
+        Adds self as parent.
+        Fails if try to add non Patho, or if creates recursion
+        Input: PathO
+        '''
+        # print('Adding:[{}] to self[{}]'.format(child_patho, self))
         if not isinstance(child_patho, PathO):
             raise TypeError('Child is not a PathO Node')
+        if child_patho in self.ancestors:
+            raise Exception('Recursion error:{}+{}'.format(self, child_patho))
         else:
             self.children.append(child_patho)
             child_patho.parent = self
-        print 'Childs chilren:', child_patho.children
+        # import pdb; pdb.set_trace()
 
 
     def get_json_dict(self, detailed=False):
@@ -92,7 +101,7 @@ class PathO(object):
         return d
 
     def get_json_string(self):
-        return json.dumps(self.get_json_dict(), encoding='utf-8',
+        return json.dumps(self.get_json_dict(),
                           ensure_ascii=False, sort_keys=False, indent=2,
                           separators=(',', ': '))
 
@@ -117,12 +126,12 @@ def tree_from_folder(source_folder):
     patho = PathO(os.path.basename(source_folder), static_fullpath=source_folder)
     patho.get_path_type()
     try:
-        patho.children = [tree_from_folder(os.path.join(source_folder,x)) for x in os.listdir(source_folder)]
+        children = [tree_from_folder(os.path.join(source_folder,x)) for x in os.listdir(source_folder)]
     except OSError as errmsg:
         pass # if is file, listdir will fail
     else:
-        for child in patho.children:
-            child.parent = patho
+        for child in children:
+            patho.add_child(child)
     return patho
 
 
@@ -132,12 +141,12 @@ def tree_from_json_dict(json_dict):
     patho.path_type = json_dict['type']
     # import pdb; pdb.set_trace()
     try:
-        patho.children = [tree_from_json_dict(x) for x in json_dict['children']]
+        children = [tree_from_json_dict(x) for x in json_dict['children']]
     except KeyError:
         pass
     else:
-        for child in patho.children:
-            child.parent = patho
+        for child in children:
+            patho.add_child(child)
     return patho
 
 
@@ -146,27 +155,28 @@ if __name__ == '__main__':
 
     # TESTS
     def test_tree_from_folder():
-        tree = tree_from_folder('tests/root')
-        # print tree.get_json_string()
+        TEST_FILE = os.path.join('tests','root')
+        tree = tree_from_folder(TEST_FILE)
+        print(tree.get_json_string())
         for i in tree.iter_down():
-            print i.static_fullpath
-            print i.path_type
-        # print tree.children[0].children[1].root
+            print(i.static_fullpath)
+            # print(i.path_type)
+        # print(tree.children[0].children[1].root)
         # for i in tree.children[0].children[1].iter_up():
-        #     print i
-        # print tree.children[0].children[1].fullpath
+        #     print(i)
+        # print(tree.children[0].children[1].fullpath)
         return tree
     tree = test_tree_from_folder()
 
-    json_dict = tree.get_json_dict()
-    print '='*20
-    print json_dict
+    # json_dict = tree.get_json_dict()
+    # print('='*20)
+    # print(json_dict)
 
 
-
-    def test_tree_from_json_dict(json_dict):
-        tree = tree_from_json_dict(json_dict)
-        print tree
-        print tree.root
-        print tree.get_json_string()
-    test_tree_from_json_dict(json_dict)
+    #
+    # def test_tree_from_json_dict(json_dict):
+    #     tree = tree_from_json_dict(json_dict)
+    #     print(tree)
+    #     print(tree.root)
+    #     print(tree.get_json_string())
+    # test_tree_from_json_dict(json_dict)

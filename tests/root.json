@@ -1,0 +1,55 @@
+{
+  "name": "root",
+  "type": "folder",
+  "children": [
+    {
+      "name": "test-1",
+      "type": "folder",
+      "children": [
+        {
+          "name": "test-1a",
+          "type": "folder",
+          "children": [
+            {
+              "name": "test_file-1a",
+              "type": "file",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "test-1b",
+          "type": "folder",
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "test-2",
+      "type": "folder",
+      "children": [
+        {
+          "name": "test-2a",
+          "type": "folder",
+          "children": [
+            {
+              "name": "test-2a-a",
+              "type": "folder",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "test-2b",
+          "type": "folder",
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "test_file",
+      "type": "file",
+      "children": []
+    }
+  ]
+}
