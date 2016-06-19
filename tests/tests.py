@@ -26,7 +26,7 @@ class TestPathTreeClass(unittest.TestCase):
         assert child1.name == 'child1'
         assert child1.root.name == 'rootpath'
         assert child1.parent.name == 'rootpath'
-        
+
 
         # with self.assertRaises(TypeError):
             # s.split(2)
