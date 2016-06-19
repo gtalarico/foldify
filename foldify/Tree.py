@@ -48,9 +48,9 @@ class Tree(object):
 
     def __init__(self, path, json=False):
         read_func = read_json if json else read_path
-        data = read_func(path)
-        if data:
-            self.root = Node(data)
+        path_dict = read_func(path)
+        if path_dict:
+            self.root = Node(path_dict)
 
     def write_json(self, path):
         with open(path, 'w') as f:
@@ -76,6 +76,9 @@ class Tree(object):
     def print_tree(self):
         print(json.dumps(self.root.get_dict(), indent=2))
 
+    def as_json_string(self):
+        return json.dumps(self.root.get_dict())
+
 
 #  Helper functions
 def get_type(path):
@@ -90,27 +93,28 @@ def get_type(path):
 
 
 def read_path(path):
-    obj = {
+    path_dict = {
         PATH_DATA.NAME: os.path.basename(path),
         PATH_DATA.TYPE: get_type(path)
     }
-    if obj[PATH_DATA.TYPE] == PATH_TYPE.FOLDER:
+    if path_dict[PATH_DATA.TYPE] == PATH_TYPE.FOLDER:
         join = os.path.join
-        obj[PATH_DATA.CHILDREN] = [
+        path_dict[PATH_DATA.CHILDREN] = [
             read_path(join(path, file_name))
             for file_name in os.listdir(path)
         ]
 
     # Print not for directory not found.
-    if obj[PATH_DATA.TYPE] == PATH_TYPE.OTHER:
+    if path_dict[PATH_DATA.TYPE] == PATH_TYPE.OTHER:
         print('Path was not found. Tree is empty.')
 
-    return obj
+    return path_dict
 
 
 def read_json(path):
     try:
         with open(path, 'r') as f:
-            return json.load(f)
+            path_dict = json.load(f)
+            return path_dict
     except IOError as errmsg:
         print('Cannot open json File. Error: {}'.format(errmsg))

@@ -10,13 +10,12 @@ try:
 except NameError:
     pass
 
-def prompt_source(json=False):
-    if json:
-        source_type = 'Json'
-    else:
-        source_type = 'Folder'
+def prompt_source():
+    source = input('Name of Source: \n>'.format())
+    if '/' in source:
+        parts = source.split('/')
+        source = os.path.join(*parts)
 
-    source = input('Name of Source {}: \n>'.format(source_type))
     if os.path.exists(source):
         return source
     else:
@@ -32,7 +31,7 @@ def prompt_dest(default_name, json=None):
     else:
         rm_method = shutil.rmtree
         dest = input('Name of Desination Folder (Blank for NAME_copy): \n>')
-        dest = '{0}_copy'.format(dest or default_name)
+        dest = dest or '{0}_copy'.format(default_name)
 
     if os.path.exists(dest):
         if input('Path already exists [{}]. Overwrite? (y/n): \n>'.format(
@@ -52,7 +51,7 @@ def prompt_dest(default_name, json=None):
 
 def menu_copy_folder_tree():
     """Copy Folder Tree."""
-    source_folder = prompt_source(json=True)
+    source_folder = prompt_source()
     if not source_folder:
         return
 
@@ -85,7 +84,7 @@ def menu_json_from_folder():
 
 def menu_folder_from_json():
     """Make Folder from Json."""
-    source_file = prompt_source(json=True)
+    source_file = prompt_source()
     if not source_file:
         return
 
@@ -99,6 +98,27 @@ def menu_folder_from_json():
         print('New folder [{}] created from json [{}]'.format(dest_folder,
                                                               source_file))
 
+def menu_compare_trees():
+    """Compare folder tree or jsons with each other"""
+    source_first = prompt_source()
+    source_second = prompt_source()
+    if not source_first and not source_second:
+        return
+
+    first_is_file = os.path.isfile(source_first)
+    second_is_file = os.path.isfile(source_second)
+
+    first_tree = Tree(source_first, json=first_is_file)
+    second_tree = Tree(source_second, json=second_is_file)
+
+    # WIP:
+
+    # json_delta.diff(first_tree.as_json_string(), second_tree.as_json_string)
+    # import pdb; pdb.set_trace()
+
+    # dict1 = dict(first_tree.root.get_dict())
+    # dict2 = dict(second_tree.root.get_dict())
+
 
 def menu_exit():
     """Exit the program."""
@@ -108,7 +128,8 @@ menu = (
     ('1', menu_copy_folder_tree),
     ('2', menu_json_from_folder),
     ('3', menu_folder_from_json),
-    ('4', menu_exit)
+    ('4', menu_exit),
+    # ('4', menu_compare_trees),
         )
 menu = OrderedDict(menu)
 
@@ -116,7 +137,7 @@ if __name__ == '__main__':
 
     while True:
         print('='*30)
-        print('Foldify')
+        print('Foldify - 2.0')
         print('='*30)
         for n, func in menu.items():
             print('{0} - {1}'.format(n, func.__doc__))

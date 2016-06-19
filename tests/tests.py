@@ -3,6 +3,9 @@ from foldify.path_tree import PathO, tree_from_folder, tree_from_json_dict
 
 TEST_FOLDER = 'root'
 
+# TODO:
+# Rewrite all tests!
+
 class TestPathTreeClass(unittest.TestCase):
 
     def setUp(self):
