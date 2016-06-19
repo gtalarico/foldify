@@ -1,51 +1,108 @@
 import sys
+import os
+import shutil
 from collections import OrderedDict
 
-from core import mkjson_from_folder, mkdirs_from_json_dict
-from core import load_file, dump_json
+from Tree import Tree
 
-# TO DO:
-# CONVERT YO Python 3
+try:
+    input = raw_input
+except NameError:
+    pass
+
+def prompt_source(json=False):
+    if json:
+        source_type = 'Json'
+    else:
+        source_type = 'Folder'
+
+    source = input('Name of Source {}: \n>'.format(source_type))
+    if os.path.exists(source):
+        return source
+    else:
+        print('Path not found: [{}]'.format(source))
+
+
+def prompt_dest(default_name, json=None):
+    if json:
+        rm_method = os.remove
+        dest = input(
+            'Name of JSON (.json will be added). Blank for folder name): \n>')
+        dest = '{0}.json'.format(dest or default_name)
+    else:
+        rm_method = shutil.rmtree
+        dest = input('Name of Desination Folder (Blank for NAME_copy): \n>')
+        dest = '{0}_copy'.format(dest or default_name)
+
+    if os.path.exists(dest):
+        if input('Path already exists [{}]. Overwrite? (y/n): \n>'.format(
+                                                                dest)) == 'y':
+            try:
+                rm_method(dest)
+            except OSError as errmsg:
+                print('Could not delete. {}'.format(errmsg))
+            else:
+                print('Deleted. ')
+        else:
+            print('Will Not overwritting.')
+            return
+
+    return dest
+
 
 def menu_copy_folder_tree():
     """Copy Folder Tree."""
-    source_folder = input('Name of Source Folder: \n>>>')
-    dest_folder = input('Name of Destination Folder (Blank for X-copy): \n>>>')
-    if dest_folder == '':
-        dest_folder = '{}_copy'.format(source_folder)
-    json_dict = mkjson_from_folder(source_folder)
-    if json_dict and mkdirs_from_json_dict(dest_folder, json_dict):
-        print('Folder Structure of [{0}] successfully copied to [{1}]'.format(
+    source_folder = prompt_source(json=True)
+    if not source_folder:
+        return
+
+    dest_folder = prompt_dest(source_folder)
+    if not dest_folder:
+        return
+
+    tree = Tree(source_folder)
+    tree.write_tree(dest_folder)
+    # tree.print_tree()
+
+    print('Folder Structure of [{0}] successfully copied to [{1}]'.format(
                                             source_folder, dest_folder))
 
 
 def menu_json_from_folder():
     """Make Json from Folder."""
-    source_folder = input('Name of Source Folder: \n>>>')
-    dest_file = input('Name of JSON (.json will be added; blank for same name): \n>>>')
-    if dest_file == '':
-        dest_file = source_folder
+    source_folder = prompt_source()
+    if not source_folder:
+        return
 
-    json_dict = mkjson_from_folder(source_folder)
-    if json_dict and dump_json(dest_file, json_dict):
-        print('New Json template created for folder [{}]'.format(source_folder))
+    dest_file = prompt_dest(source_folder, json=True)
+    if not dest_file:
+        return
+
+    tree = Tree(source_folder)
+    tree.write_json(dest_file)
+    print('New Json template created for folder [{}]'.format(source_folder))
 
 
 def menu_folder_from_json():
     """Make Folder from Json."""
-    source_file = input('Name of Source JSON: \n>>>')
-    dest_folder = input('Name of Destination Folder (Leave Blank to try use json root): \n>>>')
-    json_dict = load_file(source_file)
-    if dest_folder == '':
-        dest_folder = json_dict['name']
-    if json_dict and mkdirs_from_json_dict(dest_folder, json_dict):
+    source_file = prompt_source(json=True)
+    if not source_file:
+        return
+
+    dest_folder = prompt_dest(source_file.replace('.json',''))
+    if not dest_folder:
+        return
+
+    tree = Tree(source_file, json=True)
+    if hasattr(tree, 'root'):
+        tree.write_tree(dest_folder)
         print('New folder [{}] created from json [{}]'.format(dest_folder,
-                                                             source_file))
+                                                              source_file))
+
 
 def menu_exit():
     """Exit the program."""
     sys.exit()
-
 
 menu = (
     ('1', menu_copy_folder_tree),
@@ -64,6 +121,7 @@ if __name__ == '__main__':
         for n, func in menu.items():
             print('{0} - {1}'.format(n, func.__doc__))
         selection = input('Select an option:')
+
         try:
             menu[selection]()
         except KeyError:
