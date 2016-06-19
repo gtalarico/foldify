@@ -1,6 +1,6 @@
 {
   "type": "folder",
-  "name": "root",
+  "name": "root2",
   "children": [
     {
       "type": "folder",
@@ -48,7 +48,7 @@
     },
     {
       "type": "file",
-      "name": "test_file",
+      "name": "test_file-new",
       "children": []
     }
   ]

@@ -2,19 +2,16 @@ import sys
 import os
 import shutil
 from collections import OrderedDict
+from pprint import pprint
 
+from deepdiff import DeepDiff
+
+import compat
 from Tree import Tree
 
-try:
-    input = raw_input
-except NameError:
-    pass
 
 def prompt_source():
     source = input('Name of Source: \n>'.format())
-    if '/' in source:
-        parts = source.split('/')
-        source = os.path.join(*parts)
 
     if os.path.exists(source):
         return source
@@ -88,7 +85,7 @@ def menu_folder_from_json():
     if not source_file:
         return
 
-    dest_folder = prompt_dest(source_file.replace('.json',''))
+    dest_folder = prompt_dest(source_file.replace('.json', ''))
     if not dest_folder:
         return
 
@@ -98,26 +95,25 @@ def menu_folder_from_json():
         print('New folder [{}] created from json [{}]'.format(dest_folder,
                                                               source_file))
 
-def menu_compare_trees():
-    """Compare folder tree or jsons with each other"""
+
+def menu_diff_trees():
+    """Prints a diff betwen two trees."""
     source_first = prompt_source()
+    if not source_first:
+        return
     source_second = prompt_source()
-    if not source_first and not source_second:
+    if not source_second:
         return
 
     first_is_file = os.path.isfile(source_first)
     second_is_file = os.path.isfile(source_second)
 
-    first_tree = Tree(source_first, json=first_is_file)
-    second_tree = Tree(source_second, json=second_is_file)
+    first_dict = Tree(source_first, json=first_is_file).as_dict
+    second_dict = Tree(source_second, json=second_is_file).as_dict
 
-    # WIP:
+    ddiff = DeepDiff(first_dict, second_dict)
 
-    # json_delta.diff(first_tree.as_json_string(), second_tree.as_json_string)
-    # import pdb; pdb.set_trace()
-
-    # dict1 = dict(first_tree.root.get_dict())
-    # dict2 = dict(second_tree.root.get_dict())
+    pprint(ddiff, indent=2)
 
 
 def menu_exit():
@@ -128,8 +124,8 @@ menu = (
     ('1', menu_copy_folder_tree),
     ('2', menu_json_from_folder),
     ('3', menu_folder_from_json),
-    ('4', menu_exit),
-    # ('4', menu_compare_trees),
+    ('4', menu_diff_trees),
+    ('5', menu_exit),
         )
 menu = OrderedDict(menu)
 
@@ -137,7 +133,7 @@ if __name__ == '__main__':
 
     while True:
         print('='*30)
-        print('Foldify - 2.0')
+        print('Foldify - 2.1')
         print('='*30)
         for n, func in menu.items():
             print('{0} - {1}'.format(n, func.__doc__))

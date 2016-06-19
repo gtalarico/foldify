@@ -73,11 +73,13 @@ class Tree(object):
                 make(path, child)
         make(path, self.root)
 
-    def print_tree(self):
-        print(json.dumps(self.root.get_dict(), indent=2))
+    @property
+    def as_dict(self):
+        return self.root.get_dict()
 
+    @property
     def as_json_string(self):
-        return json.dumps(self.root.get_dict())
+        return json.dumps(self.as_dict)
 
 
 #  Helper functions
