@@ -1,0 +1,776 @@
+{
+  "name": "wdrive",
+  "type": "folder",
+  "children": [
+    {
+      "name": "Project Name",
+      "type": "folder",
+      "children": [
+        {
+          "name": "Construction",
+          "type": "folder",
+          "children": [
+            {
+              "name": "Bid Packages",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "Contracts",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "Schedules",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "Punch Lists",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "Sketches",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "Field Reports",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "Cost Estimation",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "RFIs",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "Meeting Minutes",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "Photos",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "ASI_ESI",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "Closeout",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "Permits",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Deliverables",
+          "type": "folder",
+          "children": [
+            {
+              "name": "Programming",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "Construction Documents",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "Drawings",
+                      "type": "folder",
+                      "children": []
+                    },
+                    {
+                      "name": "Specifications",
+                      "type": "folder",
+                      "children": []
+                    },
+                    {
+                      "name": "Models",
+                      "type": "folder",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "Drawings",
+                      "type": "folder",
+                      "children": []
+                    },
+                    {
+                      "name": "Specifications",
+                      "type": "folder",
+                      "children": []
+                    },
+                    {
+                      "name": "Models",
+                      "type": "folder",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Hand-off",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "Layout",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "Proforma",
+                      "type": "folder",
+                      "children": []
+                    },
+                    {
+                      "name": "Layout Drawings",
+                      "type": "folder",
+                      "children": []
+                    },
+                    {
+                      "name": "Metrics",
+                      "type": "folder",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "Proforma",
+                      "type": "folder",
+                      "children": []
+                    },
+                    {
+                      "name": "Layout Drawings",
+                      "type": "folder",
+                      "children": []
+                    },
+                    {
+                      "name": "Metrics",
+                      "type": "folder",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Due Diligence",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "Objects and Schedules",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "_Archive",
+                      "type": "folder",
+                      "children": []
+                    },
+                    {
+                      "name": "Quotes",
+                      "type": "folder",
+                      "children": []
+                    },
+                    {
+                      "name": "Quantity Take-off",
+                      "type": "folder",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "_Archive",
+                      "type": "folder",
+                      "children": []
+                    },
+                    {
+                      "name": "Quotes",
+                      "type": "folder",
+                      "children": []
+                    },
+                    {
+                      "name": "Quantity Take-off",
+                      "type": "folder",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Design Development",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "Drawings",
+                      "type": "folder",
+                      "children": []
+                    },
+                    {
+                      "name": "Specifications",
+                      "type": "folder",
+                      "children": []
+                    },
+                    {
+                      "name": "Models",
+                      "type": "folder",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "Drawings",
+                      "type": "folder",
+                      "children": []
+                    },
+                    {
+                      "name": "Specifications",
+                      "type": "folder",
+                      "children": []
+                    },
+                    {
+                      "name": "Models",
+                      "type": "folder",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Coordination Analysis",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "Quantity Take-off",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "Signage",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "Sales",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Design",
+          "type": "folder",
+          "children": [
+            {
+              "name": "Design Intent",
+              "type": "folder",
+              "children": []
+            },
+            {
+              "name": "Art and Accessories",
+              "type": "folder",
+              "children": []
+            },
+            {
+              "name": "Art Projects",
+              "type": "folder",
+              "children": []
+            },
+            {
+              "name": "Furniture",
+              "type": "folder",
+              "children": []
+            },
+            {
+              "name": "Finishes and Lighting",
+              "type": "folder",
+              "children": []
+            },
+            {
+              "name": "Concept",
+              "type": "folder",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "Consultants",
+          "type": "folder",
+          "children": [
+            {
+              "name": "Incoming",
+              "type": "folder",
+              "children": []
+            },
+            {
+              "name": "Outgoing",
+              "type": "folder",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "Models",
+          "type": "folder",
+          "children": [
+            {
+              "name": "Existing Conditions",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Archive",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "Fit-Out",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Project 2",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "Project 1",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "3D Visualization",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "05_Photoshop",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "Archive",
+                      "type": "folder",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "02_3D_files",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "01_Archive",
+                      "type": "folder",
+                      "children": []
+                    },
+                    {
+                      "name": "02_Project_Models",
+                      "type": "folder",
+                      "children": []
+                    },
+                    {
+                      "name": "03_Xref",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "01_Archive",
+                          "type": "folder",
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "07_Proxy",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "06_Final_images",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "01_Archive",
+                      "type": "folder",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "03_2D_Files",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "01_Finishes_Maps",
+                      "type": "folder",
+                      "children": [
+                        {
+                          "name": "01_Photography",
+                          "type": "folder",
+                          "children": []
+                        },
+                        {
+                          "name": "02_Maps",
+                          "type": "folder",
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "04_Render_output",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "01_Received",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "Reality Capture",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Pre-Construction",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "As-Built",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "Upgrades",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Upgrade 1",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "Upgrade 2",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "Test-Fit",
+              "type": "folder",
+              "children": []
+            },
+            {
+              "name": "Coordination Analysis",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "IFC",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "Archive",
+                  "type": "folder",
+                  "children": []
+                },
+                {
+                  "name": "NWC",
+                  "type": "folder",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "Property Record",
+              "type": "folder",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

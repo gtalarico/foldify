@@ -4,10 +4,10 @@ from collections import OrderedDict
 
 from settings import ALLOWED_FILES
 
+
 class PATH_TYPE:
     FOLDER = 'folder'
     FILE = 'file'
-    OTHER = 'N/A'
 
 
 class PATH_DATA:
@@ -20,7 +20,7 @@ class Node(object):
     def __init__(self, path_data):
         self.name = path_data.get(PATH_DATA.NAME, None)
         self.parent = None
-        self.type = path_data.get(PATH_DATA.TYPE, PATH_TYPE.OTHER)
+        self.type = path_data.get(PATH_DATA.TYPE, None)
         self.children = [
             Node(child)
             for child in path_data.get(PATH_DATA.CHILDREN, [])
@@ -87,9 +87,6 @@ class Tree(object):
 def get_type(path):
     exists = os.path.exists
     isdir = os.path.isdir
-    if not exists(path):
-        print('[{}] does not exist.'.format(path))
-        return PATH_TYPE.OTHER
     if isdir(path):
         return PATH_TYPE.FOLDER
     return PATH_TYPE.FILE
@@ -109,9 +106,6 @@ def read_path(path):
             for file_name in os.listdir(path)
             if splittext(file_name)[1] in ALLOWED_FILES]
     # import pdb; pdb.set_trace()
-    # Print not for directory not found.
-    if path_dict[PATH_DATA.TYPE] == PATH_TYPE.OTHER:
-        print('Path was not found. Tree is empty.')
 
     return path_dict
 
