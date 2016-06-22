@@ -97,7 +97,7 @@ def menu_folder_from_json():
 
 
 def menu_diff_trees():
-    """Prints a diff betwen two trees."""
+    """Prints a diff betwen two trees (BETA)."""
     source_first = prompt_source()
     if not source_first:
         return
@@ -113,7 +113,37 @@ def menu_diff_trees():
 
     ddiff = DeepDiff(first_dict, second_dict)
 
-    pprint(ddiff, indent=2)
+    pprint(ddiff, indent=1)
+
+
+def menu_get_stats():
+    """Prints Basic stats (BETA)."""
+    source_first = prompt_source()
+    if not source_first:
+        return
+
+    first_is_file = os.path.isfile(source_first)
+
+    tree = Tree(source_first, json=first_is_file).as_dict
+
+    print('='*40)
+    pprint(tree, indent=2)
+    print('='*40)
+
+    def count_dict(d, leve=0):
+        cnt = 0
+        for e in d:
+            if type(d[e]) is dict:
+                cnt += test(d[e])
+                level +=1
+            else:
+                cnt += 1
+        return cnt
+
+
+    print('Total items: ', count_dict(tree))
+    print('Layers:', level)
+
 
 
 def menu_exit():
@@ -125,7 +155,8 @@ menu = (
     ('2', menu_json_from_folder),
     ('3', menu_folder_from_json),
     ('4', menu_diff_trees),
-    ('5', menu_exit),
+    ('5', menu_get_stats),
+    ('6', menu_exit),
         )
 menu = OrderedDict(menu)
 

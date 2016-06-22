@@ -2,6 +2,7 @@ import os
 import json
 from collections import OrderedDict
 
+from settings import ALLOWED_FILES
 
 class PATH_TYPE:
     FOLDER = 'folder'
@@ -28,11 +29,11 @@ class Node(object):
             child.parent = self
 
     def get_dict(self):
-        return OrderedDict({
-            PATH_DATA.NAME: self.name,
-            PATH_DATA.TYPE: self.type,
-            PATH_DATA.CHILDREN: [child.get_dict() for child in self.children]
-        })
+        d = OrderedDict()
+        d[PATH_DATA.NAME] = self.name
+        d[PATH_DATA.TYPE] = self.type
+        d[PATH_DATA.CHILDREN] = [child.get_dict() for child in self.children]
+        return d
 
 
 class Tree(object):
@@ -99,13 +100,15 @@ def read_path(path):
         PATH_DATA.NAME: os.path.basename(path),
         PATH_DATA.TYPE: get_type(path)
     }
+    splittext = os.path.splitext  # returns tuple (filename, extension)
+
     if path_dict[PATH_DATA.TYPE] == PATH_TYPE.FOLDER:
         join = os.path.join
         path_dict[PATH_DATA.CHILDREN] = [
             read_path(join(path, file_name))
             for file_name in os.listdir(path)
-        ]
-
+            if splittext(file_name)[1] in ALLOWED_FILES]
+    # import pdb; pdb.set_trace()
     # Print not for directory not found.
     if path_dict[PATH_DATA.TYPE] == PATH_TYPE.OTHER:
         print('Path was not found. Tree is empty.')
