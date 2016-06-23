@@ -3,3 +3,6 @@
 Possible tasks
 ☐ Print Usage when source_file is not provided.
 ☐ Add additional stats to print_tree
+☐ Implement instalation
+
+☐ Format for module use: foldify.tree('path', json=True), etc
