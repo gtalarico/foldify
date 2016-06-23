@@ -1,36 +1,29 @@
-# Foldify
+## Foldify
 
 An interactive CLI Tool to manage folder structures.
+dist folder includes windows binary.
 
-*Use at your own risk*
+##### Usage:
+foldidy.exe --help
+foldify.exe source_file [dest_file] 
 
-## Implemented Functionalities:
-* Copy Tree Structure
+##### Prints directory tree
+    foldidy.exe source_file
+##### Copy source_file directory to dest_file path
+    foldidy.exe source_file  dest_file 
+##### Create JSON of source_file as dest_file.json
+    foldidy.exe source_file  dest_file.json 
+##### Create dest_file directory from source_file.json
+    foldidy.exe source_file.json  dest_file 
+    
 
-    (files are not copied)
-
-
-* Create JSON from Folder Structure
-
-    (include file names, create blank files. Useful for using .txt for notes)
-
-
-* Create Folder Structure from JSON file.
-
-    (structure must match output json)
-
-
-* Compare trees.
-
-    Prints a diff view comparing differences between two trees
-
-
-
-## To Do
-* Create create distribution for Windows
-
+##### To Do
+* consolidate interactive and foldfity. Make interactive an option.
 * Rebuild Tests
-* Add real argparse CLI interface
-* Add Tkinter GUI ?
-* add options to include or not files
+* Add Tkinter GUI
 * Add Licence
+
+##### Done
+* Create create distribution for Windows
+* Add real argparse CLI interface
+* add options to include or not files
