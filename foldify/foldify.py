@@ -1,176 +1,95 @@
 import sys
 import os
-import shutil
-from collections import OrderedDict
-from pprint import pprint
+import argparse
+import re
+from argparse import RawDescriptionHelpFormatter as help_formatter
 
-from deepdiff import DeepDiff
-
-import compat
 from Tree import Tree
 
+# TODO:
+# bug: handle overwite folder
 
-def prompt_source():
-    source = input('Name of Source: \n>'.format())
+def is_json(filename):
+    try:
+        if filename.split('.')[1].lower() == 'json':
+            return True
+    except:
+        pass
+    return False
 
-    if os.path.exists(source):
-        return source
-    else:
-        print('Path not found: [{}]'.format(source))
-
-
-def prompt_dest(default_name, json=None):
-    if json:
-        rm_method = os.remove
-        dest = input(
-            'Name of JSON (.json will be added). Blank for folder name): \n>')
-        dest = '{0}.json'.format(dest or default_name)
-    else:
-        rm_method = shutil.rmtree
-        dest = input('Name of Desination Folder (Blank for NAME_copy): \n>')
-        dest = dest or '{0}_copy'.format(default_name)
-
-    if os.path.exists(dest):
-        if input('Path already exists [{}]. Overwrite? (y/n): \n>'.format(
-                                                                dest)) == 'y':
-            try:
-                rm_method(dest)
-            except OSError as errmsg:
-                print('Could not delete. {}'.format(errmsg))
-            else:
-                print('Deleted. ')
-        else:
-            print('Will Not overwritting.')
-            return
-
-    return dest
+def prep_path(path):
+    ''' Ensure path complies with system'''
+    path = re.sub(r'(\\)|(/)(\\\\)','/', path)
+    return os.path.join(path)
 
 
-def menu_copy_folder_tree():
-    """Copy Folder Tree."""
-    source_folder = prompt_source()
-    if not source_folder:
-        return
 
-    dest_folder = prompt_dest(source_folder)
-    if not dest_folder:
-        return
+usage = 'python foldify.py source_file [destination_file] [--help]'
+description = '''
+-------------------------------------------------------
 
-    tree = Tree(source_folder)
-    tree.write_tree(dest_folder)
-    # tree.print_tree()
+Foldify - CLI tools for managing directory Trees.
+Operations:
 
-    print('Folder Structure of [{0}] successfully copied to [{1}]'.format(
-                                            source_folder, dest_folder))
+## Print a directory tree ##
+$ foldify directory1
 
+## Copy a directory Tree ##
+$ foldify directory1 directory2
 
-def menu_json_from_folder():
-    """Make Json from Folder."""
-    source_folder = prompt_source()
-    if not source_folder:
-        return
+## Create Json from a directory ##
+$ foldify directory1 directory1.json
 
-    dest_file = prompt_dest(source_folder, json=True)
-    if not dest_file:
-        return
+## Create Directory from json ##
+$ foldify directory1.json directory1
 
-    tree = Tree(source_folder)
-    tree.write_json(dest_file)
-    print('New Json template created for folder [{}]'.format(source_folder))
+Json data must be stored in a file with .json extension
+
+-------------------------------------------------------
+'''
 
 
-def menu_folder_from_json():
-    """Make Folder from Json."""
-    source_file = prompt_source()
-    if not source_file:
-        return
+parser = argparse.ArgumentParser(prog='Foldify', description=description,
+                                 usage=usage,
+                                 formatter_class=help_formatter,
+                                 )
 
-    dest_folder = prompt_dest(source_file.replace('.json', ''))
-    if not dest_folder:
-        return
+parser.add_argument('source_file', type=str,
+                    help='Source filepath.')
 
-    tree = Tree(source_file, json=True)
-    if hasattr(tree, 'root'):
-        tree.write_tree(dest_folder)
-        print('New folder [{}] created from json [{}]'.format(dest_folder,
-                                                              source_file))
+parser.add_argument('dest_file', type=str, nargs='?',
+                    help='Destination filepath.')
 
+args_dict = vars(parser.parse_args())
+globals().update(args_dict)
 
-def menu_diff_trees():
-    """Prints a diff betwen two trees (BETA)."""
-    source_first = prompt_source()
-    if not source_first:
-        return
-    source_second = prompt_source()
-    if not source_second:
-        return
-
-    first_is_file = os.path.isfile(source_first)
-    second_is_file = os.path.isfile(source_second)
-
-    first_dict = Tree(source_first, json=first_is_file).as_dict
-    second_dict = Tree(source_second, json=second_is_file).as_dict
-
-    ddiff = DeepDiff(first_dict, second_dict)
-
-    pprint(ddiff, indent=1)
-
-
-def menu_get_stats():
-    """Prints Basic stats (BETA)."""
-    source_first = prompt_source()
-    if not source_first:
-        return
-
-    first_is_file = os.path.isfile(source_first)
-
-    tree = Tree(source_first, json=first_is_file).as_dict
-
+# ensure source_file exists, if not exit.
+exists = os.path.exists
+if not exists(source_file):
     print('='*40)
-    pprint(tree, indent=2)
+    parser.print_help()
     print('='*40)
-
-    def count_dict(d, leve=0):
-        cnt = 0
-        for e in d:
-            if type(d[e]) is dict:
-                cnt += test(d[e])
-                level +=1
-            else:
-                cnt += 1
-        return cnt
-
-
-    print('Total items: ', count_dict(tree))
-    print('Layers:', level)
-
-
-
-def menu_exit():
-    """Exit the program."""
+    print('ERROR: source_file does not exist.')
     sys.exit()
 
-menu = (
-    ('1', menu_copy_folder_tree),
-    ('2', menu_json_from_folder),
-    ('3', menu_folder_from_json),
-    ('4', menu_diff_trees),
-    ('5', menu_get_stats),
-    ('6', menu_exit),
-        )
-menu = OrderedDict(menu)
 
-if __name__ == '__main__':
+# If no dest_file, print source_tree
+if not dest_file:
+    tree = Tree(source_file, json=is_json(source_file))
+    print('='*40)
+    tree.print_tree()
+    print('='*40)
+    sys.exit()
 
-    while True:
-        print('='*30)
-        print('Foldify - 3.0')
-        print('='*30)
-        for n, func in menu.items():
-            print('{0} - {1}'.format(n, func.__doc__))
-        selection = input('Select an option:')
+# if dest_file exists, prompt for overwite before continuing.
+if exists(dest_file):
+    if input('WARNING: dest_file already exists. Overwrite? (y/n)') != 'y':
+        print('Exiting.')
+        print('='*40)
+        sys.exit()
 
-        try:
-            menu[selection]()
-        except KeyError:
-            print('Invalid Option')
+
+# Copy folder, json from dir, or dir from json, depending on formats.
+tree = Tree(source_file, json=is_json(source_file))
+write_dest = tree.write_json if is_json(dest_file) else tree.write_tree
+write_dest(dest_file)
