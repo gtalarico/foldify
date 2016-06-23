@@ -1,5 +1,5 @@
 ## Project initializer ##
 
 Possible tasks
-☐ Create W Drive Folder
-☐ Create Google Drive Folder
+☐ Print Usage when source_file is not provided.
+☐ Add additional stats to print_tree
