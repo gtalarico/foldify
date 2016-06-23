@@ -1,54 +1,54 @@
 {
-  "type": "folder",
   "name": "root",
+  "type": "folder",
   "children": [
     {
-      "type": "folder",
-      "name": "test-2",
-      "children": [
-        {
-          "type": "folder",
-          "name": "test-2b",
-          "children": []
-        },
-        {
-          "type": "folder",
-          "name": "test-2a",
-          "children": [
-            {
-              "type": "folder",
-              "name": "test-2a-a",
-              "children": []
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "folder",
       "name": "test-1",
+      "type": "folder",
       "children": [
         {
-          "type": "folder",
-          "name": "test-1b",
-          "children": []
-        },
-        {
-          "type": "folder",
           "name": "test-1a",
+          "type": "folder",
           "children": [
             {
-              "type": "file",
               "name": "test_file-1a",
+              "type": "file",
               "children": []
             }
           ]
+        },
+        {
+          "name": "test-1b",
+          "type": "folder",
+          "children": []
         }
       ]
     },
     {
-      "type": "file",
+      "name": "test-2",
+      "type": "folder",
+      "children": [
+        {
+          "name": "test-2a",
+          "type": "folder",
+          "children": [
+            {
+              "name": "test-2a-a",
+              "type": "folder",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "test-2b",
+          "type": "folder",
+          "children": []
+        }
+      ]
+    },
+    {
       "name": "test_file",
+      "type": "file",
       "children": []
     }
   ]

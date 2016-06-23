@@ -164,7 +164,7 @@ if __name__ == '__main__':
 
     while True:
         print('='*30)
-        print('Foldify - 2.1')
+        print('Foldify - 3.0')
         print('='*30)
         for n, func in menu.items():
             print('{0} - {1}'.format(n, func.__doc__))
