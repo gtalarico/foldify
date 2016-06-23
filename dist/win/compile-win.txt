@@ -1,4 +1,3 @@
 (foldify) C:\Users\gtalarico\Dropbox\Shared\dev-ubuntu\repos\foldify\foldify\ >
 
-pyinstaller --onefile --paths="C:\User
-s\gtalarico\Dropbox\Shared\dev\win-envs\foldify\Lib\site-packages\deepdiff" --additional-hooks-dir=. foldify-cli.py
+pyinstaller --onefile --paths="C:\Users\gtalarico\Dropbox\Shared\dev\win-envs\foldify\Lib\site-packages\deepdiff" --additional-hooks-dir=. foldify-cli.py
