@@ -1,9 +1,17 @@
 ## Foldify
 
-An interactive CLI Tool to manage folder structures.
+A python CLI Tool to manage folder structures.
 dist folder includes windows binary.
 
-##### Usage:
+##### Features
+* Copy a directory tree (only .txt files are copied, which can be used to note directory usage)
+* Create a JSON from a directory tree.
+* Create a directory tree from a json
+* Print a directory tree.
+
+##### Usage: (use foldify.py or windows binday in dist folder)
+python foldify.py source_folder [dest_folder]
+
 foldidy.exe --help
 foldify.exe source_file [dest_file] 
 
@@ -18,10 +26,12 @@ foldify.exe source_file [dest_file]
     
 
 ##### To Do
-* consolidate interactive and foldfity. Make interactive an option.
+* Recompile linux binary.
+* consolidate interactive and foldfity; make interactive mode an option.
+* Add more stats when printing tree.
 * Rebuild Tests
+* Add Licence ?
 * Add Tkinter GUI
-* Add Licence
 
 ##### Done
 * Create create distribution for Windows
