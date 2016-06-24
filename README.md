@@ -9,7 +9,7 @@ dist folder includes windows binary.
 * Create a directory tree from a json
 * Print a directory tree.
 
-##### Usage: (use foldify.py or windows binday in dist folder)
+### Usage: (use foldify.py or windows binday in dist folder)
 python foldify.py source_folder [dest_folder]
 
 foldidy.exe --help
@@ -25,7 +25,7 @@ foldify.exe source_file [dest_file]
     foldidy.exe source_file.json  dest_file 
     
 
-##### To Do
+### To Do
 * Recompile linux binary.
 * consolidate interactive and foldfity; make interactive mode an option.
 * Add more stats when printing tree.
@@ -33,7 +33,7 @@ foldify.exe source_file [dest_file]
 * Add Licence ?
 * Add Tkinter GUI
 
-##### Done
+### Done
 * Create create distribution for Windows
 * Add real argparse CLI interface
 * add options to include or not files
