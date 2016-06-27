@@ -7,7 +7,9 @@ from argparse import RawDescriptionHelpFormatter as help_formatter
 from Tree import Tree
 
 # TODO:
+# Improvements: Add reddit suggestions
 # bug: handle overwite folder
+
 
 def is_json(filename):
     try:
