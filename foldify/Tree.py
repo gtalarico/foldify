@@ -32,8 +32,8 @@ class Node(object):
                                        })
     '''
     def __init__(self, path_data):
-        self.name = path_data.get(PATH_KEYS.NAME, None)
         self.parent = None
+        self.name = path_data.get(PATH_KEYS.NAME, None)
         self.type = path_data.get(PATH_KEYS.TYPE, None)
         self.children = [
             Node(child)
@@ -141,21 +141,25 @@ def get_type(path):
 
 
 def read_path(path):
-    path_dict = {
-        PATH_KEYS.NAME: os.path.basename(path),
-        PATH_KEYS.TYPE: get_type(path)
-    }
-    splittext = os.path.splitext  # returns tuple (filename, extension)
+    if not os.path.exists(path):
+        print('Cannot find foder: {}'.format(path))
+        sys.exit()
+    else:
+        path_dict = {
+            PATH_KEYS.NAME: os.path.basename(path),
+            PATH_KEYS.TYPE: get_type(path)
+        }
+        splittext = os.path.splitext  # returns tuple (filename, extension)
 
-    if path_dict[PATH_KEYS.TYPE] == PATH_TYPES.FOLDER:
-        join = os.path.join
-        path_dict[PATH_KEYS.CHILDREN] = [
-            read_path(join(path, file_name))
-            for file_name in os.listdir(path)
-            if splittext(file_name)[1] in ALLOWED_FILES]
-    # import pdb; pdb.set_trace()
+        if path_dict[PATH_KEYS.TYPE] == PATH_TYPES.FOLDER:
+            join = os.path.join
+            path_dict[PATH_KEYS.CHILDREN] = [
+                read_path(join(path, file_name))
+                for file_name in os.listdir(path)
+                if splittext(file_name)[1] in ALLOWED_FILES]
+        # import pdb; pdb.set_trace()
 
-    return path_dict
+        return path_dict
 
 
 def read_json(path):
@@ -165,6 +169,7 @@ def read_json(path):
             return path_dict
     except IOError as errmsg:
         print('Cannot open json File. Error: {}'.format(errmsg))
+        sys.exit()
 
 
 if __name__ == '__main__':
