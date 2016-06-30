@@ -49,6 +49,13 @@ class Node(object):
         d[PATH_KEYS.CHILDREN] = [child.get_dict() for child in self.children]
         return d
 
+    def __iter__(self):
+        for child in self.children:
+            yield child
+
+    def __repr__(self):
+        return '<NODE: {} | TYPE:{}>'.format(self.name, self.type)
+
 
 class Tree(object):
     ''' Create a Tree Object from a path or valid json.
@@ -71,8 +78,7 @@ class Tree(object):
     def __init__(self, path, json=False):
         read_func = read_json if json else read_path
         path_dict = read_func(path)
-        if path_dict:
-            self.root = Node(path_dict)
+        self.root = Node(path_dict)
 
     def write_json(self, path):
         with open(path, 'w') as f:
@@ -131,6 +137,9 @@ class Tree(object):
 
         print_node(self.root)
 
+    def __repr__(self):
+        return '<TREE: {}>'.format(self.root.name)
+
 #  Helper functions
 def get_type(path):
     exists = os.path.exists
@@ -157,7 +166,6 @@ def read_path(path):
                 read_path(join(path, file_name))
                 for file_name in os.listdir(path)
                 if splittext(file_name)[1] in ALLOWED_FILES]
-        # import pdb; pdb.set_trace()
 
         return path_dict
 

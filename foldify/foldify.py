@@ -6,22 +6,9 @@ from argparse import RawDescriptionHelpFormatter as help_formatter
 
 from Tree import Tree
 
-# TODO:
-# bug: handle overwite folder
 
 def is_json(filename):
-    try:
-        if filename.split('.')[1].lower() == 'json':
-            return True
-    except:
-        pass
-    return False
-
-def prep_path(path):
-    ''' Ensure path complies with system'''
-    path = re.sub(r'(\\)|(/)(\\\\)','/', path)
-    return os.path.join(path)
-
+    return filename.endswith('.json')
 
 
 usage = 'python foldify.py source_file [destination_file] [--help]'
