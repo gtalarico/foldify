@@ -6,94 +6,86 @@ import re
 
 from pathlib import *
 
-logger = logging.getLogger('empty_label')
+LEVEL = logging.INFO
+# LEVEL = logging.DEBUG
+
+logging.basicConfig(level=LEVEL)
+logger = logging.getLogger('')
 
 # TO DO:
-
-# Add logger
 # Run with Arg or local
-# Show Confirmation
 # Function Remove Labels
 
-# Args: Ignore,
-
-
-# from Tree import Tree
-# try:
-    # shutil.rmtree('WDRIVE_COPY')
-# except:
-    # print('Not deleted')
-    # pass
-
-# tree = Tree('tests/wdrive')
-# tree.write_tree('WDRIVE_COPY')
-# sys.exit()
-
+ROOT_DIR = 'tests/wdrive2'
+# ROOT_DIR = os.getcwd()
 EMPTY_LABEL = '_EMPTY'
 
-IGNORE = ['(desktop.ini)']
-# IGNORE = ['(desktop.txt)', '(.*\.txt)']
+# IGNORE = ['(desktop.ini)']
+IGNORE = ['(desktop.ini)', '(.*\.txt)']
 IGNORE_PATTERN = r'|'.join(IGNORE)
 
-used_folders = []
 empty_folders = []
+used_folders = []
+used_folders_ancestors = []
+
+transactions = []
+
 
 def label_empty(path):
-    print('LABEL: Checking for label:: ', path)
     if not path.name.endswith(EMPTY_LABEL):
-        print('LABEL: Adding LABEL: ', path)
         new_path = Path(path.parent, path.name + EMPTY_LABEL)
-        try:
-            path.rename(new_path)
-        except:
-            print(sys.exc_info()[0].__name__)
-        else:
-            print('LABEL: RENAMED: ', new_path)
+        transactions.append((path, new_path))
 
-def remove_label(path):
-    print('REMOVE LABEL: Checking for label:: ', path)
+
+def unlabel_used(path):
     if path.name.endswith(EMPTY_LABEL):
-        print('REMOVE LABEL: Removing:: ', path)
-        new_name = Path(path.parent, path.name.split(EMPTY_LABEL)[0])
-        path.rename(new_name)
-        print('REMOVE LABEL: RENAMED: ', path)
+        new_path = Path(path.parent, path.name.split(EMPTY_LABEL)[0])
+        # path.rename(new_name)
+        transactions.append((path, new_path))
 
 
 def listDirs(dir):
     for root, subFolders, files in os.walk(dir, topdown=False):
-        print('ROOT:', root)
-        print('SUBS:', subFolders)
-        print('FILES:', files)
+        logger.debug('<ROOT:{}|SUBS:{}|FILES:{}>'.format(root, subFolders,
+                                                         files))
+
         path = Path(root)
-        # print('PAT:', any([re.match(IGNORE_PATTERN, f) for f in files]))
-        if not files or any([re.match(IGNORE_PATTERN, f) for f in files]):
-            # print('EMPTY')
-            empty_folders.append(path)
-        else:
-            # print('>>>>>>>USED')
+        matches_all_filters = all([re.match(IGNORE_PATTERN, f) for f in files])
+        # logger.debug('MATCH FILTER: %s', match_ignore)
+        logger.debug('<FILES:{}>'.format(files))
+        if files and not matches_all_filters:
             used_folders.append(path)
+            logger.debug('%s is USED', root)
+        else:
+            empty_folders.append(path)
+            logger.debug('%s is EMPTY', root)
 
-        # for folder in subFolders:
-            # print('>>FOLDER:', folder)
-            # yield Path(root, folder)
 
-listDirs('tests/root')
-# for i in listDirs('tests/root'):
-    # pass
-    # os.rename(i, '{}_EMPTY'.format(i))
+def apply_transactions():
+    if not transactions:
+        logger.info('NO TRANSACTIONS')
+        return
+    print('='*30)
+    for t in transactions:
+        print('[{}] > [{}]'.format(t[0].name, t[1].name))
+    if input('EXECUTE ? [y]') == 'y':
+        for src, dst in transactions:
+            try:
+                src.rename(dst)
+            except:
+                logger.error(sys.exc_info()[0].__name__)
+                logger.error('Could not rename: [{}]>[{}]'.format(src,dst))
 
-# listDirs('tests/root')
-
-used_folders_ancestors = []
+listDirs(ROOT_DIR)
 for used in used_folders:
     for dependend in used.parents:
         used_folders_ancestors.append(dependend)
 
-print('USED:' , used_folders)
-print('USED DEPENDENDS:' , used_folders_ancestors)
-
-
 [label_empty(x) for x in empty_folders if x not in used_folders_ancestors]
-[remove_label(x) for x in used_folders + used_folders_ancestors]
+[unlabel_used(x) for x in used_folders + used_folders_ancestors]
 
-# [remove_label(x) for x in used_folders + used_folders_ancestors + empty_folders]
+# [unlabel_used(x) for x in used_folders + used_folders_ancestors + empty_folders]
+
+create_update_labels_transactions()
+# create_remove_all_labels_transactions()
+apply_transactions()
