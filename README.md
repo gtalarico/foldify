@@ -13,17 +13,21 @@ dist folder includes windows binary.
 python foldify.py source_folder [dest_folder]
 
 foldidy.exe --help
-foldify.exe source_file [dest_file] 
+foldify.exe source_file [dest_file]
 
 ##### Prints directory tree
     foldidy.exe source_file
+##### Label Empty folders with *_EMPTY* suffix
+    foldidy.exe source_file --label update
+    foldidy.exe source_file --label remove
+    foldidy.exe source_file --label update --custom-label LABEL
 ##### Copy source_file directory to dest_file path
-    foldidy.exe source_file  dest_file 
+    foldidy.exe source_file  dest_file
 ##### Create JSON of source_file as dest_file.json
-    foldidy.exe source_file  dest_file.json 
+    foldidy.exe source_file  dest_file.json
 ##### Create dest_file directory from source_file.json
-    foldidy.exe source_file.json  dest_file 
-    
+    foldidy.exe source_file.json  dest_file
+
 
 ### To Do
 * Recompile linux binary.

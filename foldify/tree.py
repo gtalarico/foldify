@@ -4,7 +4,8 @@ import json
 import shutil
 from collections import OrderedDict
 
-from settings import ALLOWED_FILES
+from settings import ALLOWED_FILES, logger
+from compat import input
 
 
 class PATH_TYPES:
@@ -65,14 +66,12 @@ class Tree(object):
 
     : param : self.root > returns root Node
 
-
     Methods:
     tree.write_json(destination)
     tree.write_tree(destination)
 
     Properties:
     tree.as_dict > self.root.get_dict()
-    tree.as_json_string > json.dumps(self.root.get_dict())
     '''
 
     def __init__(self, path, json=False):
@@ -93,41 +92,41 @@ class Tree(object):
                 print('ERROR: Could not overwrite:')
                 sys.exit(sys.exc_info()[0].__name__)
 
+    def write_tree(self, dest_path):
+        ''' Creates directory tree from root node.
+        write_tree(dest_path)
+        Will delete tree if exists.
+        '''
 
-    def write_tree(self, path):
-        self.delete_if_dir_exists(path)
-
-        join = os.path.join
-        path, name = os.path.split(path)
+        self.delete_if_dir_exists(dest_path)
+        dest_path, name = os.path.split(dest_path)
         self.root.name = name
 
-        def make(path, node):
-            path = join(path, node.name)
+        def make(dest_path, node):
+            dest_path = os.path.join(dest_path, node.name)
             if node.type == PATH_TYPES.FOLDER:
                 try:
-                    os.makedirs(path)
+                    os.makedirs(dest_path)
                 except:
                     raise
             elif node.type == PATH_TYPES.FILE:
-                with open(path, 'a') as f:
+                with open(dest_path, 'a') as f:
                     pass
 
             for child in node.children:
-                make(path, child)
-        make(path, self.root)
-        print('write_tree completed [{}]'.format(path))
+                make(dest_path, child)
+        make(dest_path, self.root)
+        logger.info('tree.write_tree() completed [{}]'.format(dest_path))
+        # print('write_tree completed [{}]'.format(dest_path))
 
     @property
     def as_dict(self):
         return self.root.get_dict()
 
-    @property
-    def as_json_string(self):
-        return json.dumps(self.as_dict)
-
     def print_tree(self):
         print('='*40)
         print(self)
+
         def print_node(node, level=0):
             print('{level} {name}'.format(level='|'*level or '|',
                                           name=node.name))
@@ -140,14 +139,28 @@ class Tree(object):
     def __repr__(self):
         return '<TREE: {}>'.format(self.root.name)
 
+
 #  Helper functions
 def get_type(path):
+    ''' Returns PATH_TYPE for path.
+    get_type(folder): 'folder'
+    get_type(file): 'file'
+    '''
     if os.path.isdir(path):
         return PATH_TYPES.FOLDER
     return PATH_TYPES.FILE
 
 
+def is_json(filename):
+    return filename.endswith('.json')
+
+
 def read_path(path):
+    ''' Opens folder as path. Returns structured dict from recursive calls.
+    read_path('path')
+    returns path_dict = {'name':'Folder', 'type':'folder', 'children':[...]}
+    Exists if path does not exists.
+    '''
 
     if not os.path.exists(path):
         sys.exit('Cannot find folder: {}'.format(path))
@@ -169,6 +182,11 @@ def read_path(path):
 
 
 def read_json(path):
+    ''' Opens + loads .json file, returns dictionary.
+    read_json('valid_path.json')
+
+    Exits if fails to open. Does ensure valid structure.
+    '''
     try:
         with open(path, 'r') as f:
             path_dict = json.load(f)
