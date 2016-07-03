@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import sys
 import os
 import argparse
@@ -15,8 +17,8 @@ usage = 'python foldify.py source_file [destination_file] [--label] [--help]'
 description = '''
 ======================================================
 Foldify - CLI tools for managing directory Trees.
-Version: {}
-Author: {}
+Version: {version}
+Author: {author}
 
 Operations:
 
@@ -24,7 +26,7 @@ Operations:
 $ foldify directory1
 
 ## Label empty Folder in tree ##
-$ foldify directory1 --label {update, remove}
+$ foldify directory1 --label [update, remove]
 
 ## Copy a directory Tree ##
 $ foldify directory1 directory2
@@ -36,7 +38,7 @@ $ foldify directory1 directory1.json
 $ foldify directory1.json directory1
 
 ======================================================
-'''.format(__version__)
+'''.format(version=__version__, author=__author__)
 
 
 parser = argparse.ArgumentParser(prog='Foldify', description=description,
