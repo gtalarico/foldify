@@ -1,12 +1,14 @@
-## Project initializer ##
-
 # TODO:
-# add os.path.normpath to arg parser
-# bug: handle overwite folder
 
-Possible tasks
-☐ Print Usage when source_file is not provided.
-☐ Add additional stats to print_tree
-☐ Implement instalation
+☐ Add -diff option to arguments
+☐ Add os.path.normpath to arg parser
+☐ Add Tests
+☐ Refactor and Consolidate Empty with foldify
 
-☐ Format for module use: foldify.tree('path', json=True), etc
+# BUGS:
+
+☐ handle overwite folder
+
+# Tests:
+☐ CLI USAGE
+☐ ALL COVERAGE

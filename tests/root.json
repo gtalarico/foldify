@@ -1,53 +1,53 @@
 {
-  "name": "root",
+  "name": "Root Folder",
   "type": "folder",
   "children": [
     {
-      "name": "test-1",
+      "name": "Folder A",
       "type": "folder",
       "children": [
         {
-          "name": "test-1a",
+          "name": "Folder A-A",
           "type": "folder",
           "children": [
             {
-              "name": "test_file-1a",
+              "name": "File A-A-1",
               "type": "file",
               "children": []
             }
           ]
         },
         {
-          "name": "test-1b",
+          "name": "Folder A-B",
           "type": "folder",
           "children": []
         }
       ]
     },
     {
-      "name": "test-2",
+      "name": "Folder B",
       "type": "folder",
       "children": [
         {
-          "name": "test-2a",
+          "name": "Folder B-A",
           "type": "folder",
           "children": [
             {
-              "name": "test-2a-a",
+              "name": "Folder B-A-A",
               "type": "folder",
               "children": []
             }
           ]
         },
         {
-          "name": "test-2b",
+          "name": "Folder B-B",
           "type": "folder",
           "children": []
         }
       ]
     },
     {
-      "name": "test_file",
+      "name": "File Root",
       "type": "file",
       "children": []
     }

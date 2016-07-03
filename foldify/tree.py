@@ -148,9 +148,9 @@ def get_type(path):
 
 
 def read_path(path):
+
     if not os.path.exists(path):
-        print('Cannot find foder: {}'.format(path))
-        sys.exit()
+        sys.exit('Cannot find folder: {}'.format(path))
     else:
         path_dict = {
             PATH_KEYS.NAME: os.path.basename(path),
@@ -174,10 +174,14 @@ def read_json(path):
             path_dict = json.load(f)
             return path_dict
     except IOError as errmsg:
-        sys.exit('Cannot open json File. Error: {}'.format(errmsg))
+        if errmsg.errno == 21:  # IsADirectoryError
+            raise TypeError("Specified JSON, gave folder: {}".format(path))
+        sys.exit('Cannot open. Error: {}'.format(errmsg))
 
 
 if __name__ == '__main__':
-
-    tree = Tree('tests/wdrive')
-    tree.print_tree()
+    pass
+    read = read_path('tests/root.json')
+    print(read)
+    # tree = Tree('tests/root')
+    # tree.print_tree()
