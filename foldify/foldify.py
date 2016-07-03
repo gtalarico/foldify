@@ -5,13 +5,14 @@ import re
 from argparse import RawDescriptionHelpFormatter as help_formatter
 
 from tree import Tree
+from empty import generate_transactions, apply_transactions
 
 
 def is_json(filename):
     return filename.endswith('.json')
 
 
-usage = 'python foldify.py source_file [destination_file] [--help]'
+usage = 'python foldify.py source_file [destination_file] [--label] [--help]'
 description = '''
 -------------------------------------------------------
 
@@ -20,6 +21,9 @@ Operations:
 
 ## Print a directory tree ##
 $ foldify directory1
+
+## Label empty Folder in tree ##
+$ foldify directory1 --label [update | remove]
 
 ## Copy a directory Tree ##
 $ foldify directory1 directory2
@@ -41,14 +45,22 @@ parser = argparse.ArgumentParser(prog='Foldify', description=description,
                                  formatter_class=help_formatter,
                                  )
 
+# File Type permissions?
+# parser.add_argument('bar', type=argparse.FileType('w'))
+
 parser.add_argument('source_file', type=str,
                     help='Source filepath.')
+
+parser.add_argument('-l', '--label', choices=['update', 'remove'],
+                    help='Adds Label _EMPTY to empty folders.')
 
 parser.add_argument('dest_file', type=str, nargs='?',
                     help='Destination filepath.')
 
+
 args_dict = vars(parser.parse_args())
 globals().update(args_dict)
+print(args_dict)
 
 # ensure source_file exists, if not exit.
 exists = os.path.exists
@@ -62,11 +74,15 @@ if not exists(source_file):
 
 # If no dest_file, print source_tree
 if not dest_file:
-    tree = Tree(source_file, json=is_json(source_file))
-    print('='*40)
-    tree.print_tree()
-    print('='*40)
-    sys.exit()
+    if label:
+        t = generate_transactions(remove_all=bool(label=='remove'))
+        apply_transactions(t)
+    else:
+        tree = Tree(source_file, json=is_json(source_file))
+        print('='*40)
+        tree.print_tree()
+        print('='*40)
+    sys.exit('Done.')
 
 # if dest_file exists, prompt for overwite before continuing.
 if exists(dest_file):
