@@ -4,7 +4,7 @@ import argparse
 import re
 from argparse import RawDescriptionHelpFormatter as help_formatter
 
-from Tree import Tree
+from tree import Tree
 
 
 def is_json(filename):

@@ -7,7 +7,7 @@ from pprint import pprint
 from deepdiff import DeepDiff
 
 import compat
-from Tree import Tree
+from tree import Tree
 
 
 def prompt_source():
@@ -111,7 +111,7 @@ def menu_diff_trees():
     first_dict = Tree(source_first, json=first_is_file).as_dict
     second_dict = Tree(source_second, json=second_is_file).as_dict
 
-    ddiff = DeepDiff(first_dict, second_dict)
+    ddiff = DeepDiff(first_dict, second_dict, ignore_order=True)
 
     pprint(ddiff, indent=1)
 

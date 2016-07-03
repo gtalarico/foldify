@@ -91,8 +91,7 @@ class Tree(object):
                 print('WARNING: Existing directory deleted.')
             except:
                 print('ERROR: Could not overwrite:')
-                print(sys.exc_info()[0].__name__)
-                sys.exit()
+                sys.exit(sys.exc_info()[0].__name__)
 
 
     def write_tree(self, path):
@@ -127,7 +126,8 @@ class Tree(object):
         return json.dumps(self.as_dict)
 
     def print_tree(self):
-
+        print('='*40)
+        print(self)
         def print_node(node, level=0):
             print('{level} {name}'.format(level='|'*level or '|',
                                           name=node.name))
@@ -142,9 +142,7 @@ class Tree(object):
 
 #  Helper functions
 def get_type(path):
-    exists = os.path.exists
-    isdir = os.path.isdir
-    if isdir(path):
+    if os.path.isdir(path):
         return PATH_TYPES.FOLDER
     return PATH_TYPES.FILE
 
@@ -176,8 +174,7 @@ def read_json(path):
             path_dict = json.load(f)
             return path_dict
     except IOError as errmsg:
-        print('Cannot open json File. Error: {}'.format(errmsg))
-        sys.exit()
+        sys.exit('Cannot open json File. Error: {}'.format(errmsg))
 
 
 if __name__ == '__main__':
