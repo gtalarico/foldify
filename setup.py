@@ -2,7 +2,7 @@ from distutils.core import setup
 setup(
   name = 'foldify',
   packages = ['foldify'], # this must be the same as the name above
-  scripts=['foldify/foldify']
+  scripts=['foldify/foldify'],
   version = '0.3.3',
   description = 'Python CLI tools to help manage directory trees and templates',
   author = 'Gui Talarico',
