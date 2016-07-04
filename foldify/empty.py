@@ -2,11 +2,12 @@ import os
 import sys
 import shutil
 import re
-from compat import input
+import sys
 
-from pathlib import *
+from pathlib import Path
 
-from settings import IGNORE_PATTERN, EMPTY_LABEL, logger, enable_debug
+from .settings import IGNORE_PATTERN, EMPTY_LABEL, logger, enable_debug
+from .compat import input
 
 
 def add_label_transaction(path, label=EMPTY_LABEL):

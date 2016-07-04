@@ -1,20 +1,28 @@
 # python setup.py sdist upload -r pypi
 # http://peterdowns.com/posts/first-time-with-pypi.html
 
-from distutils.core import setup
+# from distutils.core import setup, find_packages
+from setuptools import setup, find_packages
 
 setup(
   name = 'foldify',
   packages = ['foldify'], # this must be the same as the name above
-  scripts=['foldify/foldify'],
-  version = '0.3.5',
+  # packages = find_packages(),
+  entry_points={
+        'console_scripts': [
+            'foldify = foldify.foldify:main',
+        ]},
+  version = '0.3.7',
+  install_requires=[
+        "pathlib",
+    ],
   description = 'Python CLI tools to help manage directory trees and templates',
   # long_description=open('README.md', 'rt').read(),
   author = 'Gui Talarico',
   author_email = 'gtalarico@gmail.com',
   url = 'https://github.com/gtalarico/foldify', # use the URL to the github repo
   license = 'MIT',
-  download_url = 'https://github.com/gtalarico/foldify/archive/0.3.5.tar.gz', # I'll explain this in a second
+  # download_url = 'https://github.com/gtalarico/foldify/archive/0.3.6.tar.gz', # I'll explain this in a second
   keywords = ['folders', 'directories'], # arbitrary keywords
   classifiers=[
         # How mature is this project? Common values are
@@ -32,8 +40,8 @@ setup(
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
         # 'Programming Language :: Python :: 2',
-        # 'Programming Language :: Python :: 2.6',
-        # 'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',

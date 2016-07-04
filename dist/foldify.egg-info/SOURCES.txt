@@ -1,0 +1,16 @@
+setup.cfg
+setup.py
+foldify/__init__.py
+foldify/compat.py
+foldify/empty.py
+foldify/foldify.py
+foldify/settings.py
+foldify/tree.py
+foldify.egg-info/PKG-INFO
+foldify.egg-info/SOURCES.txt
+foldify.egg-info/dependency_links.txt
+foldify.egg-info/entry_points.txt
+foldify.egg-info/requires.txt
+foldify.egg-info/top_level.txt
+tests/__init__.py
+tests/tests.py

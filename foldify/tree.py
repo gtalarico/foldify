@@ -4,8 +4,8 @@ import json
 import shutil
 from collections import OrderedDict
 
-from settings import ALLOWED_FILES, logger
-from compat import input
+from .settings import ALLOWED_FILES, logger
+from .compat import input
 
 
 class PATH_TYPES:
@@ -124,11 +124,11 @@ class Tree(object):
         return self.root.get_dict()
 
     def print_tree(self):
-        print('='*40)
+        print('=' * 40)
         print(self)
 
         def print_node(node, level=0):
-            print('{level} {name}'.format(level='|'*level or '|',
+            print('{level} {name}'.format(level='|' * level or '|',
                                           name=node.name))
             level += 1
             for child in node.children:

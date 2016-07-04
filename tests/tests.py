@@ -3,14 +3,14 @@ import os
 import json
 import shutil
 import sys
+import logging
+
 sys.path.append('../foldify')
 sys.path.append('foldify')
 
 from foldify.tree import Tree, Node, get_type, read_path
 from foldify.empty import generate_transactions, apply_transactions
-from foldify.settings import EMPTY_LABEL, enable_debug
-# from foldify python -m unittest discover -s ..
-
+from foldify.settings import EMPTY_LABEL, enable_debug, disable_logger
 
 TEST_DIR = os.path.dirname(os.path.realpath(__file__))
 os.chdir(TEST_DIR)
@@ -19,7 +19,9 @@ TEST_FOLDER = 'root'
 TEMP_JSON = 'root_temp.json'
 TEMP_FOLDER = 'root_temp'
 
+# from foldify python -m unittest discover -s ..
 # enable_debug()
+disable_logger()
 
 
 class TestNodeOpening(unittest.TestCase):

@@ -1,0 +1,3 @@
+[console_scripts]
+foldify = foldify.foldify:main
+
