@@ -6,14 +6,15 @@ from distutils.core import setup
 setup(
   name = 'foldify',
   packages = ['foldify'], # this must be the same as the name above
-  scripts=['foldify/foldify.py'],
-  version = '0.3.4',
+  scripts=['foldify/foldify'],
+  version = '0.3.5',
   description = 'Python CLI tools to help manage directory trees and templates',
+  # long_description=open('README.md', 'rt').read(),
   author = 'Gui Talarico',
   author_email = 'gtalarico@gmail.com',
   url = 'https://github.com/gtalarico/foldify', # use the URL to the github repo
   license = 'MIT',
-  download_url = 'https://github.com/gtalarico/foldify/archive/0.3.3.tar.gz', # I'll explain this in a second
+  download_url = 'https://github.com/gtalarico/foldify/archive/0.3.5.tar.gz', # I'll explain this in a second
   keywords = ['folders', 'directories'], # arbitrary keywords
   classifiers=[
         # How mature is this project? Common values are
