@@ -2,11 +2,15 @@ import unittest
 import os
 import json
 import shutil
+import sys
+sys.path.append('../foldify')
+sys.path.append('foldify')
 
 from foldify.tree import Tree, Node, get_type, read_path
 from foldify.empty import generate_transactions, apply_transactions
 from foldify.settings import EMPTY_LABEL, enable_debug
 # from foldify python -m unittest discover -s ..
+
 
 TEST_DIR = os.path.dirname(os.path.realpath(__file__))
 os.chdir(TEST_DIR)
