@@ -22,7 +22,7 @@ setup(
   author_email = 'gtalarico@gmail.com',
   url = 'https://github.com/gtalarico/foldify', # use the URL to the github repo
   license = 'MIT',
-  # download_url = 'https://github.com/gtalarico/foldify/archive/0.3.6.tar.gz', # I'll explain this in a second
+  download_url = 'https://github.com/gtalarico/foldify/archive/0.3.7.tar.gz', # I'll explain this in a second
   keywords = ['folders', 'directories'], # arbitrary keywords
   classifiers=[
         # How mature is this project? Common values are
