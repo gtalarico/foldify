@@ -7,12 +7,17 @@ from setuptools import setup, find_packages
 setup(
   name = 'foldify',
   packages = ['foldify'], # this must be the same as the name above
+  scripts = ['foldify/__init__.py',
+             'foldify/tree.py',
+             'foldify/settings.py',
+             'foldify/empty.py',
+             'foldify/compat.py'],
   # packages = find_packages(),
   entry_points={
         'console_scripts': [
             'foldify = foldify.foldify:main',
         ]},
-  version = '0.3.7',
+  version = '0.3.8',
   install_requires=[
         "pathlib",
     ],
@@ -22,7 +27,7 @@ setup(
   author_email = 'gtalarico@gmail.com',
   url = 'https://github.com/gtalarico/foldify', # use the URL to the github repo
   license = 'MIT',
-  download_url = 'https://github.com/gtalarico/foldify/archive/0.3.7.tar.gz', # I'll explain this in a second
+  download_url = 'https://github.com/gtalarico/foldify/archive/0.3.8.tar.gz', # I'll explain this in a second
   keywords = ['folders', 'directories'], # arbitrary keywords
   classifiers=[
         # How mature is this project? Common values are

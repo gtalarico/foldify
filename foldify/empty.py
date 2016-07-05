@@ -6,8 +6,8 @@ import sys
 
 from pathlib import Path
 
-from .settings import IGNORE_PATTERN, EMPTY_LABEL, logger, enable_debug
-from .compat import input
+from settings import IGNORE_PATTERN, EMPTY_LABEL, logger, enable_debug
+from compat import input
 
 
 def add_label_transaction(path, label=EMPTY_LABEL):

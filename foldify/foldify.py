@@ -6,12 +6,12 @@ import argparse
 import re
 from argparse import RawDescriptionHelpFormatter as help_formatter
 
-from .tree import Tree, is_json
-from .empty import generate_transactions, apply_transactions
-from .settings import logger, enable_debug
-from .compat import input
+from tree import Tree, is_json
+from empty import generate_transactions, apply_transactions
+from settings import logger, enable_debug
+from compat import input
 
-from .__init__ import __version__, __author__
+from __init__ import __version__, __author__
 
 
 def main():

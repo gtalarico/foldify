@@ -4,9 +4,8 @@ import json
 import shutil
 from collections import OrderedDict
 
-from .settings import ALLOWED_FILES, logger
-from .compat import input
-
+from settings import ALLOWED_FILES, logger
+from compat import input
 
 class PATH_TYPES:
     FOLDER = 'folder'
