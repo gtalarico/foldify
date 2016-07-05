@@ -33,15 +33,17 @@ A python CLI Tool to manage folder structures.
 
 
 ##### To Do
-* Better Docs for commands.
-* Recompile Windows binary.
-* Add more stats when printing tree.
-* Rebuild Tests
+* Better Docs for commands
+* Tree stats when printing tree
+* Add Deepdiff integration
+* More Tests
 * Add Tkinter GUI
 
-### Done
-* Add Licence ?
-* consolidate interactive and foldfity; make interactive mode an option.
+##### Done
+* Recompile Windows binary.
+* Add Licence
+* Consolidate interactive and foldfity; make interactive mode an option.
+* Custom labels
 * Create create distribution for Windows
-* Add real argparse CLI interface
-* add options to include or not files
+* Add argparse CLI interface
+* Add options to include or not files
