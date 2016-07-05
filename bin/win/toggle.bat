@@ -1,0 +1,1 @@
+foldify.exe . --label update
