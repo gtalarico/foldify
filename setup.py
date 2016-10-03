@@ -24,7 +24,7 @@ setup(
   description = 'Python CLI tools to help manage directory trees and templates',
   # long_description=open('README.md', 'rt').read(),
   author = 'Gui Talarico',
-  author_email = 'gtalarico@gmail.com',
+  author_email = '',
   url = 'https://github.com/gtalarico/foldify', # use the URL to the github repo
   license = 'MIT',
   download_url = 'https://github.com/gtalarico/foldify/archive/0.3.8.tar.gz', # I'll explain this in a second
