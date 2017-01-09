@@ -10,8 +10,6 @@ A python CLI Tool to manage folder structures.
 * Pretty Print a directory tree
 
 ##### Install
-    pip install foldify
-    or
     python setup.py install
 
 ##### Usage: (use foldify.py or windows binday in dist folder)
