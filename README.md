@@ -36,6 +36,7 @@ A python CLI Tool to manage folder structures.
 * Add Deepdiff integration
 * More Tests
 * Add Tkinter GUI
+* Add Migration Feature
 
 ##### Done
 * Recompile Windows binary.
